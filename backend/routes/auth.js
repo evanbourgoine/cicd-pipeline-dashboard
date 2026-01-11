@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 
 // Simplified user storage (in production, use a database)
 const users = [
   {
     id: 1,
     username: 'admin',
-    password: '$2a$10$qZYvJ8Xd8K9YxJ0xZYvJ8eN0xJ0xZYvJ8eN0xJ0xZYvJ8eN0xJ0xZ' // 'password123'
+    password: 'password123'
   }
 ];
 
@@ -16,13 +15,20 @@ router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
     
+    console.log('Login attempt - Username:', username, 'Password:', password); // DEBUG
+    
     const user = users.find(u => u.username === username);
     if (!user) {
+      console.log('User not found'); // DEBUG
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    const isValid = await bcrypt.compare(password, user.password);
-    if (!isValid) {
+    console.log('User found:', user); // DEBUG
+    console.log('Password match:', password === user.password); // DEBUG
+    
+    // Simple comparison - no bcrypt
+    if (password !== user.password) {
+      console.log('Password mismatch'); // DEBUG
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
@@ -30,8 +36,10 @@ router.post('/login', async (req, res) => {
       expiresIn: '24h'
     });
 
+    console.log('Login successful, sending token'); // DEBUG
     res.json({ token, username: user.username });
   } catch (error) {
+    console.error('Login error:', error);
     res.status(500).json({ error: error.message });
   }
 });

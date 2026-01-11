@@ -3,7 +3,7 @@ const { sequelize } = require('../config/db');
 
 const BuildMetadata = sequelize.define('BuildMetadata', {
   runId: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.BIGINT,  // Changed from INTEGER to BIGINT
     primaryKey: true
   },
   repository: {

@@ -9,7 +9,8 @@ A full-stack web application for monitoring CI/CD pipeline metrics with multi-da
 - **REST API**: Express.js backend with JWT authentication
 - **Interactive Dashboard**: React frontend with Chart.js visualizations
 - **GitHub Integration**: Automatic syncing of workflow data
-- **Secure Authentication**: JWT-based auth with bcrypt password hashing
+- **Secure Authentication**: JWT-based auth with encrypted passwords
+- **Docker Support**: Containerized deployment
 
 ## Tech Stack
 
@@ -22,14 +23,29 @@ A full-stack web application for monitoring CI/CD pipeline metrics with multi-da
 
 ### Frontend
 - React
-- Chart.js / Recharts
+- Chart.js
 - Axios for API calls
 
 ### DevOps
 - Docker & Docker Compose
-- GitHub Actions CI/CD
 
-## Installation
+## Quick Start with Docker
+```bash
+# Clone the repository
+git clone https://github.com/YOUR_USERNAME/cicd-pipeline-dashboard.git
+cd cicd-pipeline-dashboard
+
+# Create .env file in backend/
+cp backend/.env.example backend/.env
+# Add your GITHUB_TOKEN and JWT_SECRET
+
+# Run with Docker Compose
+docker-compose up
+```
+
+Visit `http://localhost:3000` and login with `admin` / `password123`
+
+## Manual Installation
 
 ### Prerequisites
 - Node.js 16+
@@ -45,7 +61,7 @@ npm install
 
 Create `.env` file:
 ```env
-PORT=5000
+PORT=5001
 MONGO_URI=mongodb://localhost:27017/cicd_dashboard
 MYSQL_HOST=localhost
 MYSQL_USER=root
@@ -86,30 +102,23 @@ npm start
 4. Login with credentials (default: admin/password123)
 5. Sync GitHub repository data via the dashboard
 
-## Environment Variables
+## Project Highlights
 
-| Variable | Description |
-|----------|-------------|
-| `GITHUB_TOKEN` | GitHub Personal Access Token for API access |
-| `MONGO_URI` | MongoDB connection string |
-| `MYSQL_HOST` | MySQL host |
-| `JWT_SECRET` | Secret key for JWT signing |
-
-## Security Features
-
-- JWT-based authentication
-- Bcrypt password hashing
-- Environment variable protection
-- CORS configuration
-- Input validation
+- **Multi-Database Integration**: Demonstrates proficiency with both SQL and NoSQL databases
+- **RESTful API Design**: Clean separation of concerns with Express.js routes
+- **Authentication & Security**: JWT tokens, password encryption, CORS configuration
+- **External API Integration**: GitHub Actions API for real-time data
+- **Full-Stack Development**: End-to-end implementation from database to UI
+- **Docker Ready**: Production-ready containerization
 
 ## Future Enhancements
 
 - [ ] Webhook support for real-time updates
 - [ ] Email notifications for failed builds
-- [ ] Support for multiple CI/CD platforms
+- [ ] Support for multiple CI/CD platforms (Jenkins, CircleCI, GitLab)
 - [ ] Advanced analytics and reporting
 - [ ] User management system
+- [ ] Deployment to cloud platform (AWS/GCP/Azure)
 
 ## License
 
